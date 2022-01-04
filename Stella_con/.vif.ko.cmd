@@ -1,0 +1,1 @@
+cmd_/home/oslab2/eskim/kubgo/src/Stella_con/vif.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/oslab2/eskim/kubgo/src/Stella_con/vif.ko /home/oslab2/eskim/kubgo/src/Stella_con/vif.o /home/oslab2/eskim/kubgo/src/Stella_con/vif.mod.o ;  true
