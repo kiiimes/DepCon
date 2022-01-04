@@ -1,0 +1,31 @@
+kind: Pod
+apiVersion: v1
+metadata:
+        name: test
+spec:
+        containers:
+                - name: test
+                  image: netperf:new
+                  resources: 
+                    limits:
+                            cpu: 2
+                            example.com/SLO: 300
+                  command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5; done"]
+                  ports:
+                  - containerPort: 80
+                - name: test1
+                  image: netperf:new
+                  resources:
+                    limits:
+                            example.com/SLO: 1
+                  command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5; done"]
+        restartPolicy: Never
+        dnsPolicy: "None"
+        dnsConfig:
+                nameservers:
+                  - 8.8.8.8
+        tolerations:
+          - key: "node-role.kubernetes.io/master"
+            operator: "Exists"
+            effect: "NoSchedule"
+

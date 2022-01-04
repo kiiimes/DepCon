@@ -1,0 +1,243 @@
+[
+    {
+        "Id": "d544aea3d0d1af3cdce2b4b08cce554e45d56fa734b902ea99e4423c457b138a",
+        "Created": "2020-07-07T09:58:26.426955081Z",
+        "Path": "/bin/bash",
+        "Args": [
+            "-ec",
+            "while :; do echo '.'; sleep 5; done"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5666,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2020-07-07T09:58:26.504170239Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:23c97b33fc14abb87a336b36ccf82afc7b69b70e0a8303d36d0d21500f623c5c",
+        "ResolvConfPath": "/var/lib/docker/containers/56945015888dadd92f276b7bd30606b273396807f280f0113e2a9203e19fc796/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/56945015888dadd92f276b7bd30606b273396807f280f0113e2a9203e19fc796/hostname",
+        "HostsPath": "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/etc-hosts",
+        "LogPath": "/var/lib/docker/containers/d544aea3d0d1af3cdce2b4b08cce554e45d56fa734b902ea99e4423c457b138a/d544aea3d0d1af3cdce2b4b08cce554e45d56fa734b902ea99e4423c457b138a-json.log",
+        "Name": "/k8s_tirest_tirest_default_ff946d52-f38f-4fe8-a201-44e9bfbfad50_0",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/volumes/kubernetes.io~secret/default-token-5gprb:/var/run/secrets/kubernetes.io/serviceaccount:ro",
+                "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/etc-hosts:/etc/hosts",
+                "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/containers/tirest/f1083d12:/dev/termination-log"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "container:56945015888dadd92f276b7bd30606b273396807f280f0113e2a9203e19fc796",
+            "PortBindings": null,
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Capabilities": null,
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "container:56945015888dadd92f276b7bd30606b273396807f280f0113e2a9203e19fc796",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 999,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": [
+                "seccomp=unconfined"
+            ],
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 2048,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "/kubepods/burstable/podff946d52-f38f-4fe8-a201-44e9bfbfad50",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 100000,
+            "CpuQuota": 200000,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/asound",
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/8a2f1137e39e97a570b09c3d9bdcf1757d409b65ae50be96f5671f3522295730-init/diff:/var/lib/docker/overlay2/ea58285096d29b04466429c3fefe0ee2ee3df26274af4e806197fdbfc6e6d434/diff:/var/lib/docker/overlay2/fb5b1fa3684b4f8b372b1da310426186a53e5a03be2b68457cd0c34aba38a56f/diff:/var/lib/docker/overlay2/7b9b66a6027aa4ded1714c19e5d032ba1ebbf875170fc8a16d304ea73fad620d/diff:/var/lib/docker/overlay2/8f522d8a76ba5f98a29bdbd253799c0722a7206f238e9bd2a3383c43af8b7b21/diff:/var/lib/docker/overlay2/1545b34f2052498d67e23d06c9141e7d6199645d8d5dcf9637b6c80d5521a533/diff",
+                "MergedDir": "/var/lib/docker/overlay2/8a2f1137e39e97a570b09c3d9bdcf1757d409b65ae50be96f5671f3522295730/merged",
+                "UpperDir": "/var/lib/docker/overlay2/8a2f1137e39e97a570b09c3d9bdcf1757d409b65ae50be96f5671f3522295730/diff",
+                "WorkDir": "/var/lib/docker/overlay2/8a2f1137e39e97a570b09c3d9bdcf1757d409b65ae50be96f5671f3522295730/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/volumes/kubernetes.io~secret/default-token-5gprb",
+                "Destination": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/etc-hosts",
+                "Destination": "/etc/hosts",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/ff946d52-f38f-4fe8-a201-44e9bfbfad50/containers/tirest/f1083d12",
+                "Destination": "/dev/termination-log",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "tirest",
+            "Domainname": "",
+            "User": "0",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "KUBERNETES_SERVICE_PORT_HTTPS=443",
+                "KUBERNETES_PORT=tcp://10.96.0.1:443",
+                "KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443",
+                "KUBERNETES_PORT_443_TCP_PROTO=tcp",
+                "KUBERNETES_PORT_443_TCP_PORT=443",
+                "KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1",
+                "KUBERNETES_SERVICE_HOST=10.96.0.1",
+                "KUBERNETES_SERVICE_PORT=443",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": null,
+            "Healthcheck": {
+                "Test": [
+                    "NONE"
+                ]
+            },
+            "Image": "sha256:23c97b33fc14abb87a336b36ccf82afc7b69b70e0a8303d36d0d21500f623c5c",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/bin/bash",
+                "-ec",
+                "while :; do echo '.'; sleep 5; done"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "annotation.io.kubernetes.container.hash": "f09e19b6",
+                "annotation.io.kubernetes.container.ports": "[{\"containerPort\":80,\"protocol\":\"TCP\"}]",
+                "annotation.io.kubernetes.container.restartCount": "0",
+                "annotation.io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+                "annotation.io.kubernetes.container.terminationMessagePolicy": "File",
+                "annotation.io.kubernetes.pod.terminationGracePeriod": "30",
+                "io.kubernetes.container.logpath": "/var/log/pods/default_tirest_ff946d52-f38f-4fe8-a201-44e9bfbfad50/tirest/0.log",
+                "io.kubernetes.container.name": "tirest",
+                "io.kubernetes.docker.type": "container",
+                "io.kubernetes.pod.name": "tirest",
+                "io.kubernetes.pod.namespace": "default",
+                "io.kubernetes.pod.uid": "ff946d52-f38f-4fe8-a201-44e9bfbfad50",
+                "io.kubernetes.sandbox.id": "56945015888dadd92f276b7bd30606b273396807f280f0113e2a9203e19fc796"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {}
+        }
+    }
+]
