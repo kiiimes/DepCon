@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: p9
+spec:
+  containers:
+    - name: p8
+      image: ubuntu:latest
+      resources: 
+        limits:
+          cpu: "300m"
+      #  requests:
+      #          cpu: "1"
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+    - name: p9
+      image: ubuntu:latest
+      resources:
+        limits:
+          cpu: "400m"
+      #  requests:
+      #          cpu: "1"
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
