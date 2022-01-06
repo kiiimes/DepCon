@@ -1,0 +1,27 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: p18
+  #namespace: qos
+  #annotations:
+  #        kubernetes.io/ingress-bandwidth: 300M
+  #        kubernetes.io/egress-bandwidth: 300M
+spec:
+  containers:
+    - name: p18
+      image: ubuntu:netperf
+      resources:
+        limits:
+          example.com/SLO: 300
+          #cpu: "650m"
+        requests:
+          cpu: "650m"
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+  restartPolicy: Never
+  #tolerations:
+  #  - key: "node-role.kubernetes.io/master"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "node.kubernetes.io/not-ready"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
