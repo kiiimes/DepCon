@@ -1,4 +1,4 @@
-# DepCon 구현 및 실행 내용 정리
+# DepCon 구현 및 실행 내용 정리
 ## DepCon scheduler 구현
 * DepCon scheduler는 network SLO를 충족시키기에 가장 적합헌 서버를 찾는 역할을 한다. 먼저, Filtering과정을 거치는데 이는 Pod에 설정한 Network SLO 달성을 위해 network bandwidth가 충분한 서버들의 리스트를 생성한다. 그 다음, Scoring 과정을 거치는데 앞에서 만들어진 서버 리스트에서 사용 가능한 CPU가 가장 많은 서버를 선택한다. 이는, DepCon agent가 각 서버에서 CPU를 동적으로 조절하여 network SLO를 달성할 수 있도록 적합환 환경을 만들어주는 과정이다. 각 기능에 대한 구현 방법은 아래와 같다. 
 
@@ -13,7 +13,7 @@
 * 기존 Kubernetes에서는 network 자원에 대한 할당 가능 여부를 filtering 과정에서 제공하지 않기 때문에 각 서버의 network capacity를 API Server에 알려준다. 
 ### Filtering 구현
 * 디렉토리 : 1번 서버) / home/oslab/eskim/depcon
-* sh slo_setting.sh 를 실행하여 network SLO 셋팅
+* sh slo_setting.sh 를 실행하여 network SLO 셋팅
 	* sh slo_setting.sh [네트워크 인터페이스] 
 ```
 #!/bin/bash
@@ -35,21 +35,22 @@ do
         http://localhost:8001/api/v1/nodes/$node/status
 done
 ```
-	1. Ethtool 명령어를 이용하여 각 서버의 network interface의 정보를 얻어 온다. 그 중 Ethernet 속도를 나타내는 Speed를 파싱하여 지원하는 ethernet 속도를 저장한다. 
-	2. 모든 노드들의 이름 리스트를 얻어오고, API server에 리소스 정보 전달을 위해 kubernetes proxy를 실행한다. -> 켜져 있지 않으면 켜는 과정을 거쳐야 함
-	3. 노드들의 리스트에서 반복문을 통해 각 노드의 이름을 가져오고 curl 명령어를 이용해 API server에 ethernet 지원 속도를 SLO의 capacity로 설정한다. -> Mbps 단위가 고려 대상이기 때문에 capacity를 Mbps단위로 지정하였음. 
+1. Ethtool 명령어를 이용하여 각 서버의 network interface의 정보를 얻어 온다. 그 중 Ethernet 속도를 나타내는 Speed를 파싱하여 지원하는 ethernet 속도를 저장한다. 
+2. 모든 노드들의 이름 리스트를 얻어오고, API server에 리소스 정보 전달을 위해 kubernetes proxy를 실행한다. -> 켜져 있지 않으면 켜는 과정을 거쳐야 함
+3. 노드들의 리스트에서 반복문을 통해 각 노드의 이름을 가져오고 curl 명령어를 이용해 API server에 ethernet 지원 속도를 SLO의 capacity로 설정한다. -> Mbps 단위가 고려 대상이기 때문에 capacity를 Mbps단위로 지정하였음. 
 * 위의 내용처럼 네트워크 자원을 등록하고 나면 kubernetes에서는 각 노드의 capacity를 확인하고 pod에 설정된 네트워크를 할당할 수 있는지 확인한다. 할당가능하다면 pod를 생성할 노드 리스트에 추가한다. 특정 서버에 pod 생성이 완료되고 나면 pod에 할당된 네트워크 자원만큼 Kubernetes에서 서버의 할당 가능한 네트워크 자원 양을 제외한다. 
 
 ### Scoring
 * Scoring과정에서는 network SLO를 달성하기 위해 필요한 CPU가 가장 많은 서버에 pod를 배치하도록 노드들의 가중치를 계산하는 역할을 한다. Kubernetes에서 제공하는 여러 플러그인들이 있지만, DepCon에서는 플러그인을 추가하여 CPU가 가장 많은 서버에 더 많은 가중치를 주도록 한다. 
 * CPU가 가장 많은 서버에 pod를 배치하는 이유는 첫 번째로, Kubernetes scheduler 쪽에서 pod의 네트워크 성능을 달성하기 위해 얼만큼의 CPU가 필요한지 알 수 없기 때문이다. 두 번째로는 CPU가 가장 많은 서버에서도 네트워크 성능을 달성하지 못하면 다른 서버들 또한, 네트워크 성능 달성이 어렵기 때문에 CPU가 가장 많은 서버에 pod를 생성한다. 
 * 이 과정에서 cpu 자원에 대한 fragmentation이 발생할 수 있는 문제점이 있었고, 미리 network 자원에 대해 필요한 CPU의 양을 예측할 수 있으면 이러한 문제점들을 해결할 수 있다는 아이디어로 이를 DepCon2에서 해결하려고 하였다.
-### Scoring 구현
+### Scoring 구현
 * 디렉토리 : /home/oslab/eskim/depcon
+
 1. 먼저, depcon.conf 파일을 /etc/kubernetes/ 디렉토리로 copy한다. 
 `cp depcon.conf /etc/kubernetes`
-	* depcon.conf는 추가하려는 플러그인의 설정파일이다. 
-	* 사용한 플러그인으로는 RequestedToCapacityRatioPriority 플러그인으로 각 리소스에 대해 가중치를 지정하여 각 자원의 capacity 대비 requested 비율(pod의 요청 자원 + 사용되고 있는 자원)을 계산하여 노드의 가중치를 결정한다. -> 가장 가중치가 큰 서버가 pod를 생성할 서버로 선택됨.
+* depcon.conf는 추가하려는 플러그인의 설정파일이다. 
+* 사용한 플러그인으로는 RequestedToCapacityRatioPriority 플러그인으로 각 리소스에 대해 가중치를 지정하여 각 자원의 capacity 대비 requested 비율(pod의 요청 자원 + 사용되고 있는 자원)을 계산하여 노드의 가중치를 결정한다. -> 가장 가중치가 큰 서버가 pod를 생성할 서버로 선택됨.
 ```
 apiVersion: v1
 kind: Policy
@@ -69,10 +70,11 @@ priorities:
           - name: Memory
             weight: 1
 ```
-	* 위와 같이 depcon.conf 파일을 작성한다. 플러그인의 weight을 2로 준 이유는 기존의 weight가 1로 설정된 플러그인들보다는 우선순위가 높아야 하기 때문이다. shape의 경우에는 최소 요청인 경우에 더 높은 우선순위를 부여하였다. -> 여기에서 최소 요청이란 [사용된 양 + 요청된 양]이 최소인 즉, utilization이 가장 낮은 (사용 가능한 자원이 가장 많은) 노드에 가중치를 더 주겠다는 의미. 그러므로 utilization이 0일 때 score를 10으로 주고 utilization이 100일 때 score를 0으로 설정
-	* resources에서는 CPU와 memory 중 CPU에 더 비중을 두어야 함. 
-		* weight의 비율을 CPU: memory = 10:1로 준 이유는 CPU와 Memory 둘 다 최대가 될 수 있는 값이 10인데 CPU가 memory의 영향을 받지 않고 가장 높은 우선순위를 가지려면 10:1의 비율로 설정해야함. 
-	* [참고] 수식 계산 방법 : [확장된 리소스를 위한 리소스 빈 패킹(bin packing) | Kubernetes](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/resource-bin-packing/)
+* 위와 같이 depcon.conf 파일을 작성한다. 플러그인의 weight을 2로 준 이유는 기존의 weight가 1로 설정된 플러그인들보다는 우선순위가 높아야 하기 때문이다. shape의 경우에는 최소 요청인 경우에 더 높은 우선순위를 부여하였다. -> 여기에서 최소 요청이란 [사용된 양 + 요청된 양]이 최소인 즉, utilization이 가장 낮은 (사용 가능한 자원이 가장 많은) 노드에 가중치를 더 주겠다는 의미. 그러므로 utilization이 0일 때 score를 10으로 주고 utilization이 100일 때 score를 0으로 설정
+* resources에서는 CPU와 memory 중 CPU에 더 비중을 두어야 함. 
+	* weight의 비율을 CPU: memory = 10:1로 준 이유는 CPU와 Memory 둘 다 최대가 될 수 있는 값이 10인데 CPU가 memory의 영향을 받지 않고 가장 높은 우선순위를 가지려면 10:1의 비율로 설정해야함. 
+* [참고] 수식 계산 방법 : [확장된 리소스를 위한 리소스 빈 패킹(bin packing) | Kubernetes](https://kubernetes.io/ko/docs/concepts/scheduling-eviction/resource-bin-packing/)
+
 2. 그 다음, kube-scheduler.conf 파일을 /etc/kubernetes/manifests 로 copy한다. 
 `cp kube-scheduler.conf /etc/kubernetes/manifests`
 * kube-scheduler.conf는 kubernetes의 default scheduler에 대한 설정파일이다. 
@@ -131,8 +133,8 @@ spec:
     name: depconfig
 status: {}
 ```
-	* kube-scheduler.conf의 경우에는 수정하게 되면 따로 kube-scheduler pod를 삭제하고 생성하는 과정을 하지 않아도 수정한 설정으로 다시 시작된다. 
-	* 앞에 설명한 플러그인 파일인 depcon.conf 파일을 kube-scheduler pod에 마운트 해주고, Kube-scheduler 명령어의 옵션으로 --policy-config-file=/etc/kubernetes/depcon.conf (depcon.conf가 있는 디렉토리)를 추가 해주면 depcon.conf에 설정한 플러그인들이 kube-scheculer에 적용된다. 
+* kube-scheduler.conf의 경우에는 수정하게 되면 따로 kube-scheduler pod를 삭제하고 생성하는 과정을 하지 않아도 수정한 설정으로 다시 시작된다. 
+* 앞에 설명한 플러그인 파일인 depcon.conf 파일을 kube-scheduler pod에 마운트 해주고, Kube-scheduler 명령어의 옵션으로 --policy-config-file=/etc/kubernetes/depcon.conf (depcon.conf가 있는 디렉토리)를 추가 해주면 depcon.conf에 설정한 플러그인들이 kube-scheculer에 적용된다. 
 
 ## DepCon agent 구현
 * DepCon agent는 각 서버에서 동적으로 CPU를 조절하여 network SLO를 달성하는 모듈이다. pod에서 보이는 network bandwidth가 network SLO보다 낮으면 network SLO 달성을 위해 CPU quota 값을 늘려주고, pod에서 보이는 network bandwidth가 network SLO보다 높으면 CPU quota 값을 줄여 다른 pod들도 함께 network SLO를 달성할 수 있도록 한다. 
@@ -155,7 +157,7 @@ systemctl stop kubelet
 cp /home/oslab/eskim/depcon/kubelet /usr/bin
 systemctl restart kubelet
 ```
-	* kubelet 데몬을 멈춘 후 depcon kubelet 실행파일을 복사 한 후에 다시 kubelet 데몬을 실행시킴
+* kubelet 데몬을 멈춘 후 depcon kubelet 실행파일을 복사 한 후에 다시 kubelet 데몬을 실행시킴
 
 #### DepCon 소스코드 수정 관련
 * DepCon agent를 실행하기 위해서는 /proc/oslab/vif{n}의 pid, goal(Network SLO)을 추가하는 과정이 필요함. 이를 스크립트로 추가할 수도 있지만, kubelet에서 pod가 생성될 때 바로 pid와 SLO 값을 설정할 수 있도록 하기 위해 kubelet을 수정
