@@ -1,0 +1,27 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: p74
+  #namespace: qos
+  #annotations:
+  #        kubernetes.io/ingress-bandwidth: 200M
+  #        kubernetes.io/egress-bandwidth: 200M
+spec:
+  containers:
+    - name: p74
+      image: dkdla58/ubuntu:netperf
+      resources:
+        limits:
+          example.com/SLO: 200
+          #cpu: "100m"
+        requests:
+          cpu: "100m"
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+  restartPolicy: Never
+  #tolerations:
+  #  - key: "node-role.kubernetes.io/master"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
+  #  - key: "node.kubernetes.io/not-ready"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"

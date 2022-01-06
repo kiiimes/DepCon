@@ -1,0 +1,34 @@
+p101
+      tx       368.27 Mbit/s         41014 packets/s
+p15
+      tx        99.58 Mbit/s          9101 packets/s
+p24
+      tx       156.90 Mbit/s         18613 packets/s
+p3
+      tx        98.36 Mbit/s          6296 packets/s
+p35
+      tx       101.15 Mbit/s          7271 packets/s
+p43
+      tx       150.19 Mbit/s         17902 packets/s
+p47
+      tx       146.52 Mbit/s         17306 packets/s
+p49
+      tx       159.72 Mbit/s         19006 packets/s
+p5
+      tx       155.28 Mbit/s         18493 packets/s
+p50
+      tx       143.66 Mbit/s         17014 packets/s
+p7
+      tx       110.11 Mbit/s          8742 packets/s
+p70
+      tx       106.73 Mbit/s          8080 packets/s
+p82
+      tx       142.14 Mbit/s         16803 packets/s
+p85
+      tx       334.69 Mbit/s         38353 packets/s
+p87
+      tx       376.21 Mbit/s         42017 packets/s
+p90
+      tx       435.42 Mbit/s         46710 packets/s
+p91
+      tx       438.95 Mbit/s         47803 packets/s
