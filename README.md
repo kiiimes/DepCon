@@ -8,7 +8,6 @@
 * [DepCon 구현 및 실행 내용 정리](https://github.com/kiiimes/DepCon/tree/master/implementation#depcon-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%8B%A4%ED%96%89-%EB%82%B4%EC%9A%A9-%EC%A0%95%EB%A6%AC)
 
 ## DepCon 실험 방법 및 결과 요약
-* [[DepCon 실험 관련 정리]]
-
+* [DepCon 실험 관련 정리](https://github.com/kiiimes/DepCon/tree/master/experiment)
 
 
