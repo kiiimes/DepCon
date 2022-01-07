@@ -5,8 +5,10 @@
 * DepCon은 클라우드 수준에서 작동하는 DepCon scheduler와 각 노드의 DepCon agent로 구성되고, 이를 가장 인기 있는 컨테이너 오케스트레이션 플랫폼인 Kubernetes에서 구현하였다. 
 
 ## DepCon 구현 및 실행 내용 정리
-* [[DepCon 구현 및 실행 내용 정리]]
+* [DepCon 구현 및 실행 내용 정리][https://github.com/kiiimes/DepCon/tree/master/implementation#depcon-%EA%B5%AC%ED%98%84-%EB%B0%8F-%EC%8B%A4%ED%96%89-%EB%82%B4%EC%9A%A9-%EC%A0%95%EB%A6%AC]
 
 ## DepCon 실험 방법 및 결과 요약
 * [[DepCon 실험 관련 정리]]
+
+
 
