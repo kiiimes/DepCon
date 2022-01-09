@@ -101,8 +101,8 @@
 ## ContainerCloudSim 코드 수정 관련
 * load balancing과 policy 관련 implementation을 시뮬레이션하기 위해, org.cloudbus.cloudsim package에서 “DatacenterBroker.java”, “CloudletScheduler.java”, “VmAllocationPolicy.java” 등의 클래스를 사용할 수 있음. 
 ### package org.cloudbus.cloudsim.examples.container.ContainerCloudSimExample1.java
-	* 주요 코드 설명
-		* 각 구성요소에 대한 리스트 생성
+* 주요 코드 설명
+	* 각 구성요소에 대한 리스트 생성
 ```
 //The cloudlet list
 private static List<ContainerCloudlet> cloudletList;
@@ -117,8 +117,9 @@ private static List<ContainerHost> hostList;
 //The frameworkList
 private static List<Framework> frameworkList;
 ```
-		* container allocation policy, vm allocation policy, host selection policy 설정
-			* 각 policy를 수정하고 싶으면 생성하는 policy를 변경하거나 해당 패키지의 파일에서 policy 코드 수정
+* container allocation policy, vm allocation policy, host selection policy 설정
+		* 각 policy를 수정하고 싶으면 생성하는 policy를 변경하거나 해당 패키지의 파일에서 policy 코드 수정
+		
 ```
 /**
 * 2-  Defining the container allocation Policy. This policy determines how Containers are
@@ -143,7 +144,8 @@ PowerContainerVmSelectionPolicy vmSelectionPolicy = new PowerContainerVmSelectio
 //HostSelectionPolicy hostSelectionPolicy = new HostSelectionPolicySerialFit();          
 HostSelectionPolicy hostSelectionPolicy = new HostSelectionPolicyFirstFit();
 ```
-		* underutilization, overutilization의 기준치를 정함
+* underutilization, overutilization의 기준치를 정함
+
 ```
 /**
 * 5- Defining the thresholds for selecting the under-utilized and over-utilized hosts.
@@ -151,15 +153,17 @@ HostSelectionPolicy hostSelectionPolicy = new HostSelectionPolicyFirstFit();
 double overUtilizationThreshold = 0.80;
 double underUtilizationThreshold = 0.70;	
 ```
-		* vmAllocationPolicy 설정
+* vmAllocationPolicy 설정
+
 ```
 /**
 * 7- The container allocation policy  which defines the allocation of VMs to containers.
 */
 ContainerVmAllocationPolicy vmAllocationPolicy = new PowerContainerVmAllocationPolicyMigrationAbstractHostSelection(hostList, vmSelectionPolicy, hostSelectionPolicy, overUtilizationThreshold, underUtilizationThreshold);
 ```
-		* Cloudlet, container, vm list를 broker로 보내기위해 brokerID를 매핑시킨 리스트 생성
-			* 아래의 frameworkList는 DRF에서 여러 framework가 자원을 요청하기 때문에 추가한 항목
+* Cloudlet, container, vm list를 broker로 보내기위해 brokerID를 매핑시킨 리스트 생성
+		* 아래의 frameworkList는 DRF에서 여러 framework가 자원을 요청하기 때문에 추가한 항목
+
 ```
 /**
 * 9- Creating the cloudlet, container and VM lists for submitting to the broker.
@@ -170,8 +174,9 @@ vmList = createVmList(brokerId, ConstantsExamples.NUMBER_VMS);
 //eunsook
 frameworkList = createFrameworkList(ConstantsExamples.NUMBER_FRAMEWORK,ConstantsExamples.NUMBER_VMS,vmList);
 ```
-		* broker, host, vm, cloudlet, container를 기반으로 Datacenter 생성
-		* broker에 cloudlet, container, vm list를 제출 (broker가 생성 및 관리)
+* broker, host, vm, cloudlet, container를 기반으로 Datacenter 생성
+* broker에 cloudlet, container, vm list를 제출 (broker가 생성 및 관리)
+
 ```
 @SuppressWarnings("unused")
 PowerContainerDatacenter e = (PowerContainerDatacenter) createDatacenter("datacenter", PowerContainerDatacenterCM.class, hostList, vmAllocationPolicy, containerAllocationPolicy, getExperimentName("ContainerCloudSimExample-1", String.valueOf(overBookingFactor)), ConstantsExamples.SCHEDULING_INTERVAL, logAddress, ConstantsExamples.VM_STARTTUP_DELAY, ConstantsExamples.CONTAINER_STARTTUP_DELAY, frameworkList);
@@ -205,48 +210,48 @@ printCloudletList(newList);
 ```
 
 ### package org.cloudbus.cloudsim.examples.container.ConstantsExamples.java
-	* 이 파일에서는 각 contatants에 대한 값을 정할 수 있음
-		* Cloudlet Length
-		* Container_Startup_Delay, VM_startup_delay : VM과 container의 시작 시간 delay
-		* VM_TYPES : 정수 값을 적게 되어있는데 이 TYPE들은 몇 개 종류의 TYPE들을 설정할건지를 나타냄
-		* VM_PES, VM_MIPS, VM_RAM, VM_BW, VM_SIZE 의 설정 값 배열을 TYPES 크기 만큼 설정 가능 -> 컨테이너, 호스트, VM 등을 설정할 때의 스펙을 설정
-			* CONTAINER, HOST 모두 위와 같은 형식으로 설정할 수 있음 
-		* NUM_HOSTS, NUM_VMS, NUMBER_CLOUDLETS, NUMBER_FRAMEWORK (DepCon을 위해 추가) : 각 호스트, VM, cloudlet, framework의 수를 설정
+* 이 파일에서는 각 contatants에 대한 값을 정할 수 있음
+	* Cloudlet Length
+	* Container_Startup_Delay, VM_startup_delay : VM과 container의 시작 시간 delay
+	* VM_TYPES : 정수 값을 적게 되어있는데 이 TYPE들은 몇 개 종류의 TYPE들을 설정할건지를 나타냄
+	* VM_PES, VM_MIPS, VM_RAM, VM_BW, VM_SIZE 의 설정 값 배열을 TYPES 크기 만큼 설정 가능 -> 컨테이너, 호스트, VM 등을 설정할 때의 스펙을 설정
+		* CONTAINER, HOST 모두 위와 같은 형식으로 설정할 수 있음 
+	* NUM_HOSTS, NUM_VMS, NUMBER_CLOUDLETS, NUMBER_FRAMEWORK (DepCon을 위해 추가) : 각 호스트, VM, cloudlet, framework의 수를 설정
 
 ### package org.cloudbus.cloudsim.container.core.Container.java
-	* core 패키지에서는 container, cloudlet, datacenter, host, storage 등 컨테이너 환경에 핵심이 되는 자원이나 구성요소에 대한 코드들로 구성되어 있음
-	* DRF 구현을 위해 Container.java에서 각 컨테이너 객체에 추가될 frameworkId라는 변수와 getter, setter를 추가한다. 
-		* frameworkId를 추가한 이유는 컨테이너가 framework 별로 할당되기 때문
+* core 패키지에서는 container, cloudlet, datacenter, host, storage 등 컨테이너 환경에 핵심이 되는 자원이나 구성요소에 대한 코드들로 구성되어 있음
+* DRF 구현을 위해 Container.java에서 각 컨테이너 객체에 추가될 frameworkId라는 변수와 getter, setter를 추가한다. 
+	* frameworkId를 추가한 이유는 컨테이너가 framework 별로 할당되기 때문
 
 ### package org.cloudbus.cloudsim.container.core.ContainerHost.java
-	* 데이터센터의 호스트의 정보를 정의, 이용가능한 cpu, memory를 정의해놓음 
-	* DepCon은 이용가능한 bandwidth도 체크를 하기 때문에 availableBw 항목을 추가
-	* 컨테이너들은 데이터센터에 이용 가능한 자원이 없으면 더이상 컨테이너를 생성하지 않음
+* 데이터센터의 호스트의 정보를 정의, 이용가능한 cpu, memory를 정의해놓음 
+* DepCon은 이용가능한 bandwidth도 체크를 하기 때문에 availableBw 항목을 추가
+* 컨테이너들은 데이터센터에 이용 가능한 자원이 없으면 더이상 컨테이너를 생성하지 않음
 
 ### package org.cloudbus.cloudsim.container.core.ContainerVm.java
-	* VM의 정보를 정의, host 이름, 현재 할당된 Bw, ram, Mips 등을 정의
-	* availableBw, availableCpu, availableMem, frameworkID를 추가하여 DepCon와 DRF에서 현재 할당가능한 자원의 양을 확인할 수 있도록 함
+* VM의 정보를 정의, host 이름, 현재 할당된 Bw, ram, Mips 등을 정의
+* availableBw, availableCpu, availableMem, frameworkID를 추가하여 DepCon와 DRF에서 현재 할당가능한 자원의 양을 확인할 수 있도록 함
 
 ### package org.cloudbus.cloudsim.container.core.Framework.java
-	* framework에 대한 정보를 정의 -> cloudsim에서 제공하지 않고 DRF 알고리즘을 구현하기 위해 추가 
-	* frameworkId, requestedCPU, requestedMem, cpuShare, memShare, dominantShare, containerList, vmList 로 구성된다. 
-	* 각 vm에는 하나의 container만 할당하고 이 vm을 container와 동일시하여 컨테이너 하나로 생각하여 계산
-	* DRF는 각 framework에서 자원 (cpu, memory)에 대한 share(requested / capacity)를 계산하고 비교하여 둘 중 큰 값을 dominant share로 정하고 여러 framework의 dominant share를 비교하여 가장 작은 dominant share를 가진 framework에 자원을 할당함 
+* framework에 대한 정보를 정의 -> cloudsim에서 제공하지 않고 DRF 알고리즘을 구현하기 위해 추가 
+* frameworkId, requestedCPU, requestedMem, cpuShare, memShare, dominantShare, containerList, vmList 로 구성된다. 
+* 각 vm에는 하나의 container만 할당하고 이 vm을 container와 동일시하여 컨테이너 하나로 생각하여 계산
+* DRF는 각 framework에서 자원 (cpu, memory)에 대한 share(requested / capacity)를 계산하고 비교하여 둘 중 큰 값을 dominant share로 정하고 여러 framework의 dominant share를 비교하여 가장 작은 dominant share를 가진 framework에 자원을 할당함 
 
 ### package org.cloudbus.cloudsim.container.core.PowerContainerVmAllocationAbstract.java
-	* vm 할당 정책에 대해 정의
-	* allocateHostForVm 함수는 Vm을 할당할 Host와 Vm을 인자로 넣어 할당해주는 함수
-	* findHostForVm 함수는 Vm을 할당할 Host를 찾는 함수 
-	* DepCon을 위해 findHostForVm 함수를 수정하여 알고리즘 적용
-		* filteringHost 함수에서는 vm에서 요청하는 network bandwidth를 할당할 수 없는 host는 리스트에서 제외함
-		* scoringHost 함수에서는 filteringHost에서 생성된 list에서 컨테이너에 할당할 수 있는 cpu가 가장 많은 host를 선택함 
+* vm 할당 정책에 대해 정의
+* allocateHostForVm 함수는 Vm을 할당할 Host와 Vm을 인자로 넣어 할당해주는 함수
+* findHostForVm 함수는 Vm을 할당할 Host를 찾는 함수 
+* DepCon을 위해 findHostForVm 함수를 수정하여 알고리즘 적용
+	* filteringHost 함수에서는 vm에서 요청하는 network bandwidth를 할당할 수 없는 host는 리스트에서 제외함
+	* scoringHost 함수에서는 filteringHost에서 생성된 list에서 컨테이너에 할당할 수 있는 cpu가 가장 많은 host를 선택함 
 
 ### package org.cloudbus.cloudsim.container.core.PowerContainerVmAllocationPolicy.java
-	* container 할당 정책에 대한 정의
-	* DepCon과 DRF를 각각 다른 policy에 정의한 이유는 DepCon은 VM 없이 호스트에 컨테이너 환경과 동일하게 만들어야 했기 때문에 컨테이너와 vm을 1:1로 스펙을 맞추어 동일시하여 할당함, DRF는 framework에 들어있는 container에 대한 정보를 얻기 편하라고 allocateVmForContainer에 구현 
-	* allocateVmForContainer 함수는 Container를 할당할 Vm와 contianer를 인자로 넣어 할당해주는 함수
-	* findVmForContainer 함수는 container를 할당할 Vm를 찾는 함수 
-	* calculateDrf [new DRF] 함수는 framework별로 구성되어 있는 리스트의 항목인 서버의 CPU와 memory를 기반으로 framework의 dominant share를 구하고 가장 작은 dominant share를 가진 framework를 선택하여 framework의 vm을 선택하여 컨테이너를 생성
+* container 할당 정책에 대한 정의
+* DepCon과 DRF를 각각 다른 policy에 정의한 이유는 DepCon은 VM 없이 호스트에 컨테이너 환경과 동일하게 만들어야 했기 때문에 컨테이너와 vm을 1:1로 스펙을 맞추어 동일시하여 할당함, DRF는 framework에 들어있는 container에 대한 정보를 얻기 편하라고 allocateVmForContainer에 구현 
+* allocateVmForContainer 함수는 Container를 할당할 Vm와 contianer를 인자로 넣어 할당해주는 함수
+* findVmForContainer 함수는 container를 할당할 Vm를 찾는 함수 
+* calculateDrf [new DRF] 함수는 framework별로 구성되어 있는 리스트의 항목인 서버의 CPU와 memory를 기반으로 framework의 dominant share를 구하고 가장 작은 dominant share를 가진 framework를 선택하여 framework의 vm을 선택하여 컨테이너를 생성
 
 ## 실험 방법 및 간략한 정리 (자세한 내용은 논문에 첨부)
 * CloudSim에서 알고리즘 구현 후 System.nanotime이라는 함수를 이용하여 시뮬레이션 시간 측정
@@ -263,4 +268,3 @@ printCloudletList(newList);
 * CloudSim GitHub : [Releases · Cloudslab/cloudsim · GitHub](https://github.com/Cloudslab/cloudsim/releases)
 * 컨테이너 환경의 CloudSim 논문 : http://www.buyya.com/papers/ContainerCloudSim.pdf
 * [효원 참고] : https://arxiv.org/ftp/arxiv/papers/1812/1812.00300.pdf
-*
