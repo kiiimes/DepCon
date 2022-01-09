@@ -253,14 +253,18 @@ printCloudletList(newList);
 * findVmForContainer 함수는 container를 할당할 Vm를 찾는 함수 
 * calculateDrf [new DRF] 함수는 framework별로 구성되어 있는 리스트의 항목인 서버의 CPU와 memory를 기반으로 framework의 dominant share를 구하고 가장 작은 dominant share를 가진 framework를 선택하여 framework의 vm을 선택하여 컨테이너를 생성
 
-## 실험 방법 및 간략한 정리 (자세한 내용은 논문에 첨부)
+## 실험 방법 및 간략한 정리
 * CloudSim에서 알고리즘 구현 후 System.nanotime이라는 함수를 이용하여 시뮬레이션 시간 측정
 * 생성까지의 시간은 합치지 않고 컨테이너 생성 요청 후 Host에 VM을 배치시키는 과정만 배치 시간으로 측정
 * 10번씩 실험한 결과의 평균으로 값 측정
 * DepCon이 DRF보다 최대 34%의 복잡도 개선을 보여주고, framework의 수 (40, 100, 400)에 따라 34%, 17%, 12%의 스케줄링 오버헤드 개선을 보여줌. 
 
-## DepCon 논문
-* 학회에 아직 출판되지 않아 추후 업로드 예정 
+## DepCon 논문 관련 (자세한 실험 결과 및 분석 있음)
+* DepCon 논문 : Paramo workshop 제출 및 accept [학회지 출판 예정]
+	* 내년에 revision 후 SCI 출판 예정
+* 졸업논문 처리 완료 후 공개 될 예정
+* 혹시, 논문의 실험 결과 관련하여 궁금하신 부분이 있으시면 아래의 메일로 연락 부탁드립니다.
+	* 이메일 : dkdla58@gmail.com
 
 ## 레퍼런스
 * CloudSim 홈페이지 : [The CLOUDS Lab: Flagship Projects - Gridbus and Cloudbus](http://www.cloudbus.org/cloudsim/)
