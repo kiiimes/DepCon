@@ -11,6 +11,7 @@
 * 기본적인 서버들의 CPU와 network capacity는 10 cores CPU, 10Gbit Ethernet으로 설정되어 있음.
 	* 설정 값을 바꾸고 싶으면 아래의 파일별 설명을 참고
 * simulation.py를 실행시키면 아래와 같이 프롬프트가 뜸
+
 ![image](https://user-images.githubusercontent.com/28219985/148676491-fae731cc-1eaa-4d12-ab95-4659fe940d47.png)
 
 * 입력
