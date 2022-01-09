@@ -20,7 +20,7 @@
 systemctl stop kubelet
 vi /etc/cni/net.d/10-flannel.conflist
 ```
-* 아래와 같은 설정 파일에 type: bandwidth의 플러그인을 추가
+* 아래와 같은 설정 파일에 type: bandwidth의 플러그인을 추가
 ```
 {
   "name": "cbr0",
