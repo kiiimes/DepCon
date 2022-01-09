@@ -35,8 +35,7 @@
 * CloudSim에서 알고리즘 구현 후 System.nanotime이라는 함수를 이용하여 시뮬레이션 시간 측정
 * 생성까지의 시간은 합치지 않고 컨테이너 생성 요청 후 Host에 VM을 배치시키는 과정만 배치 시간으로 측정
 * 10번씩 실험한 결과의 평균으로 값 측정
-* DepCon이 DRF보다 최대 34%의 복잡도 개선을 보여주고, framework의 수 (40, 100, 400)에 따라 34%, 17%, 12%의 스케줄링 오버헤드 개선을 보여줌. ![21EECCE2-47E2-48AB-9F02-A59AFBADD2F3](https://user-images.githubusercontent.com/28219985/148675661-863c92f7-377f-4920-9d05-2c0f0a9057b0.png)
-
+* DepCon이 DRF보다 최대 34%의 복잡도 개선을 보여주고, framework의 수 (40, 100, 400)에 따라 34%, 17%, 12%의 스케줄링 오버헤드 개선을 보여줌.
 
 ## DepCon 논문 관련 (자세한 실험 결과 및 분석 있음)
 * DepCon 논문 : Paramo workshop 제출 및 accept [학회지 출판 예정]
