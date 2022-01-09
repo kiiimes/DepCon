@@ -30,13 +30,13 @@ for i in range(numOfContainer):
     availableBw = random.randrange(50,101)
     containerList.append([availableCpu,availableBw])
 ```
-	* 각 컨테이너에서 요청하는 자원은 1이상 3 미만의 CPU와 50이상 101 미만의 network로 랜덤하게 요청하도록 설정하였는데 이 범위를 필요에 따라 수정해서 사용 가능
+* 각 컨테이너에서 요청하는 자원은 1이상 3 미만의 CPU와 50이상 101 미만의 network로 랜덤하게 요청하도록 설정하였는데 이 범위를 필요에 따라 수정해서 사용 가능
 	
 ```
 for i in range(numOfNode):
 	nodeList[i]=[10,10000]
 ```
-	* 모든 서버를 10cores CPU, 10Gbit network 로 설정하였는 데 필요에 따라 수정 가능
+* 모든 서버를 10cores CPU, 10Gbit network 로 설정하였는 데 필요에 따라 수정 가능
 
 * drf.py : drf의 스케줄링 알고리즘과 관련된 코드
 * depcon.py : depcon의 스케줄링 알고리즘과 관련된 코드
