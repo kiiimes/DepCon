@@ -11,7 +11,7 @@
 * 기본적인 서버들의 CPU와 network capacity는 10 cores CPU, 10Gbit Ethernet으로 설정되어 있음.
 	* 설정 값을 바꾸고 싶으면 아래의 파일별 설명을 참고
 * simulation.py를 실행시키면 아래와 같이 프롬프트가 뜸
-[image:AF6EF062-FE18-44AC-B6E4-9485E6068726-2845-00000497EFF5A7BC/image.png]
+![image](https://user-images.githubusercontent.com/28219985/148676491-fae731cc-1eaa-4d12-ab95-4659fe940d47.png)
 * 입력
 	* number of node : node들의 수 
 	* number of container : container들의 수
@@ -43,10 +43,13 @@ for i in range(numOfNode):
 
 ## 실험 방법
 * 시뮬레이터를 이용하여 컨테이너 수를 2000개로 고정하고, 노드 수를 100, 200, 300 개로 증가를 하여 실험 진행
-	* DRF의 경우에는 framework 수를 200개, 400개, 2000개로 증가하여 실험 진행
+	* DRF의 경우에는 framework(테넌트) 수를 200개, 400개, 2000개로 증가하여 실험 진행
 
 ## 간략한 실험 결과
-* 
+* DRF의 스케줄링 오버헤드는 테넌트 수가 200개에서 2000개로 증가함에 따라 스케줄링 오버헤드가 15배 증가
+* 반면, DepCon의 스케줄링 오버헤드는 테넌트 수가 오버헤드에 영향을 주지 않음
+* DepCon은 서버 수가 100에서 300으로 증가함에 따라 0.072ms에서 0.135ms으로 스케줄링 오버헤드가 1.8배만 증가
+	* 서버 수가 300개일 경우에는 DRF가 테넌트 수 2000개, 400개 일 때의 스케줄링 오버헤드보다 DepCon이 스케줄링 오버헤드를 각각 640%, 45% 단축 시킴
 
 ## DepCon 논문 관련 (자세한 실험 결과 및 분석 있음)
 * DepCon 논문 : Paramo workshop 제출 및 accept [학회지 출판 예정]
