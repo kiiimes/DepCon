@@ -3,7 +3,7 @@
 * 추가로 다른 multi-resource scheduling 기법인 DRF와 DepCon의 스케줄링 오버헤드를 비교하는 실험을 진행
 * DepCon 실험은 총 4가지 실험을 진행하였음. 
 	* 네트워크 성능 평가 
-		* [링크]
+		* [네트워크 성능 평가 실험 관련 정리](https://github.com/kiiimes/DepCon/blob/master/experiment/network_performance/README.md)
 		1. k8s와 DepCon의 Pod 수 증가에 따른 네트워크 성능 평가 및 비교
 			* 2대의 서버에서 300Mbps의 SLO를 요구하는 pod 수를 5, 10, 15, 20개로 증가하여 네트워크 성능 측정
 		2. k8s와 DepCon에서 여러 network SLO를 요구하는 pod들의 네트워크 성능 평가 및 비교
