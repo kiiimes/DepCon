@@ -13,7 +13,9 @@
 * 1번 서버를 master node, 2번 서버를 worker node로 사용하였고 pod들의 생성은 2번 서버에서 진행하였다.
 #### tc 실험 방법 (기존 Kubernetes의 네트워크 트래픽 셰이핑 플러그인 이용) 
 * 1번 서버(Master node)에서 netserver 실행 -> pod 생성 수와 맞게 실행
+
 `netserver -p 1 && netserver -p 2 && netserver -p [pod를 5개 실행하면 5개의 netserver 실행]`
+
 * 2번 서버 (Worker node) 에서 Kubernetes의 네트워크 트래픽 셰이핑 플러그인을 적용
 	* kubelet을 정지한 후 플러그인 추가를 위해 설정파일 열기
 ```
@@ -46,7 +48,7 @@ vi /etc/cni/net.d/10-flannel.conflist
   ]
 }
 ```
-	* 아래의 커맨드로 kubelet을 재시작한 후 플러그인이 제대로 적용되었는지 확인
+* 아래의 커맨드로 kubelet을 재시작한 후 플러그인이 제대로 적용되었는지 확인
 ```
 systemctl restart kubelet
 cat /etc/cni/net.d/10-flannel.conflist
@@ -167,7 +169,9 @@ spec:
 * 1번 (Master node), 3번 (Evaluation machine)에서 netserver를 실행하여 네트워크에서 bottleneck이 발생하지 않도록 하고, 랜덤으로 100Mbps, 300Mbps로 구성된 30개의 컨테이너를 생성하여 실험 진행 
 #### tc 실험 방법 (기존 Kubernetes의 네트워크 트래픽 셰이핑 플러그인 이용) 
 * 1번 서버(Master node)에서 netserver.sh 실행 -> pod 생성 수와 맞게 스크립트 수정
+
 `netserver -p 1 && netserver -p 2 && netserver -p [pod를 5개 실행하면 5개의 netserver 실행]`
+
 * 2,4 번 서버 (Worker node) 에서 Kubernetes의 네트워크 트래픽 셰이핑 플러그인을 적용
 	* 1번 실험 방법과 동일
 * tc 실험 디렉토리 : [1번 서버] /home/oslab/eskim/depcon, [2번 서버] /home/oslab2/eskim/depcon/tc_netdiff_210312, [6번 서버] /home/test/eskim/depcon/tc_netdiff_210312 (raw data는 dropbox에 존재)
@@ -212,7 +216,9 @@ pidstat -G netperf 120 1 > pidstat.txt & mpstat -P ALL 120 1 > mpstat.txt
 
 #### slo 실험 방법 (기존 Kubernetes의 네트워크 트래픽 셰이핑 플러그인 이용) 
 * 1번 서버(Master node)에서 netserver.sh 실행 -> pod 생성 수와 맞게 스크립트 수정
+
 `netserver -p 1 && netserver -p 2 && netserver -p [pod를 5개 실행하면 5개의 netserver 실행]`
+
 * 2,6 번 서버 (Worker node) 에서 Kubernetes의 네트워크 트래픽 셰이핑 플러그인을 적용
 	* 1번 실험 방법과 동일
 * slo 실험 디렉토리 : [1번 서버] /home/oslab/eskim/depcon, [2번 서버] /home/oslab2/eskim/depcon/slo_netdiff_210312, [6번 서버] /home/test/eskim/depcon/slo_netdiff_210312 (raw data는 dropbox에 존재)
@@ -254,7 +260,9 @@ pidstat -G netperf 120 1 > pidstat.txt & mpstat -P ALL 120 1 > mpstat.txt
 
 #### tc 실험 방법 (기존 Kubernetes의 네트워크 트래픽 셰이핑 플러그인 이용) 
 * 7,11,12번 서버(Master node)에서 netserver.sh 실행 -> pod 생성 수와 맞게 스크립트 수정
+
 `netserver -p 1 && netserver -p 2 && netserver -p [pod를 5개 실행하면 5개의 netserver 실행]`
+
 * 2,3,4,6,8,10 번 서버 (Worker node) 에서 Kubernetes의 네트워크 트래픽 셰이핑 플러그인을 적용
 	* 1번 실험 방법과 동일
 * tc 실험 디렉토리 : 
@@ -292,7 +300,9 @@ pidstat -G netperf 120 1 > pidstat.txt & mpstat -P ALL 120 1 > mpstat.txt
 
 #### slo 실험 방법 (기존 Kubernetes의 네트워크 트래픽 셰이핑 플러그인 이용) 
 * 7,11,12번 서버(Master node)에서 netserver.sh 실행 -> pod 생성 수와 맞게 스크립트 수정
+
 `netserver -p 1 && netserver -p 2 && netserver -p [pod를 5개 실행하면 5개의 netserver 실행]`
+
 * 2,3,4,6,8,10 번 서버 (Worker node) 에서 Kubernetes의 네트워크 트래픽 셰이핑 플러그인을 적용
 	* 1번 실험 방법과 동일
 * tc 실험 디렉토리 : 
