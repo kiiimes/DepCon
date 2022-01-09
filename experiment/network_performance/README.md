@@ -276,7 +276,7 @@ pidstat -G netperf 120 1 > pidstat.txt & mpstat -P ALL 120 1 > mpstat.txt
 	* netperf_pod.sh : netperf, vnstat, pidstat을 실행하는 스크립트
 		* 2번 실험의 스크립트와 같음 
 		* 각 서버별로 Node name을 grep하여 스크립트에 설정해줌. 
-	* vnstat_pod.sh : vnstat을 이용하여 120초 동안 실험 진행 -> netperf_pod.sh 에서 호출됨
+	* vnstat_pod.sh : vnstat을 이용하여 120초 동안 실험 진행 -> netperf_pod.sh 에서 호출됨
 		* 2번 실험의 스크립트와 같음 
 		* 각 서버별로 Node name을 grep하여 스크립트에 설정해줌. 
 	* p1.yaml : 랜덤으로 100Mbps, 400Mbps의 network SLO를 가지는 pod를 20개씩, 200Mbps, 300Mbps의 network SLO를 가지는 pod를 30개씩 생성하여 총 100개의 pod 생성, 1번 실험처럼 annotations의 ingress, egress 수정해주면 됨. 
@@ -314,7 +314,7 @@ pidstat -G netperf 120 1 > pidstat.txt & mpstat -P ALL 120 1 > mpstat.txt
 	* netperf_pod.sh : netperf, vnstat, pidstat을 실행하는 스크립트
 		* 2번 실험의 스크립트와 같음 
 		* 각 서버별로 Node name을 grep하여 스크립트에 설정해줌. 
-	* vnstat_pod.sh : vnstat을 이용하여 120초 동안 실험 진행 -> netperf_pod.sh 에서 호출됨
+	* vnstat_pod.sh : vnstat을 이용하여 120초 동안 실험 진행 -> netperf_pod.sh 에서 호출됨
 		* 2번 실험의 스크립트와 같음 
 		* 각 서버별로 Node name을 grep하여 스크립트에 설정해줌. 
 	* p1.yaml : 랜덤으로 100Mbps, 400Mbps의 network SLO를 가지는 pod를 20개씩, 200Mbps, 300Mbps의 network SLO를 가지는 pod를 30개씩 생성하여 총 100개의 pod 생성, 1번 실험처럼 example.com/SLO 설정해주면 됨. 
